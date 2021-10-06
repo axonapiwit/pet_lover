@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950915822378",
+    "project_id": "petlover-application",
+    "storage_bucket": "petlover-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950915822378:android:bd8ab2cd868fee07da6453",
+        "android_client_info": {
+          "package_name": "com.example.pet_lover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950915822378-5lk4uca8sorui1f84ljv5v3i7bic11bt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCMPdgefZkwkWhlezBfAu5C-yJqfnZ0Lc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950915822378-5lk4uca8sorui1f84ljv5v3i7bic11bt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
