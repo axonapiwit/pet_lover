@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_lover/screens/find.dart';
-
+import 'input.dart';
+import 'sale.dart';
 import 'sidebar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,6 +13,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Icon searchIcon = Icon(Icons.search);
+  int _selectedIndex = 0;
+  List<Widget> _widgetOptions = <Widget>[
+    FindPage(),
+    SalePage(),
+  ];
+
+  void _onItemTap(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,42 +47,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            centerTitle: true,
-            automaticallyImplyLeading: false,
-            bottom: TabBar(
-              labelColor: Colors.black,
-              indicatorColor: Colors.black,
-              tabs: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text('Find Home'),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text('For Sale'),
-                ),
-              ],
-            ),
-            backgroundColor: Colors.green.withOpacity(0.20),
-            elevation: 0,
-            leading: IconButton(
-                icon: Icon(
-                  Icons.menu,
-                  color: Colors.green,
-                ),
-                onPressed: () {}),
+            backgroundColor: Colors.pink.shade300,
             actions: <Widget>[
               IconButton(
-                  icon: Icon(Icons.shopping_bag, color: Colors.green),
+                  icon: Icon(Icons.shopping_bag, color: Colors.white),
                   onPressed: () {})
             ],
           ),
-          body: Container(
-            child: TabBarView(
-              children: [
-                FindPage(),
-                Text('data'),
-              ],
+          backgroundColor: Colors.white,
+          bottomNavigationBar: BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            clipBehavior: Clip.antiAlias,
+            notchMargin: 5,
+            child: BottomNavigationBar(
+                backgroundColor: Colors.pink.shade300,
+                iconSize: 30,
+                showSelectedLabels: false,
+                showUnselectedLabels: true,
+                currentIndex: _selectedIndex,
+                type: BottomNavigationBarType.fixed,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.home,
+                        size: 40,
+                      ),
+                      label: 'Find Home'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.money), label: 'Shopping'),
+                ],
+                onTap: _onItemTap),
+          ),
+          body: Center(
+            child: _widgetOptions.elementAt(_selectedIndex),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.pink.shade300,
+            child: Icon(Icons.edit),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Input()),
             ),
           ),
         ),
