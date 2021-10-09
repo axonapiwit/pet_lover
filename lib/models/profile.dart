@@ -1,6 +1,9 @@
 class Profile {
   String email;
   String password;
+  String fname;
+  String lname;
 
-  Profile({required this.email, required this.password});
+  Profile(
+      {this.email = '', this.password = '', this.fname = '', this.lname = ''});
 }

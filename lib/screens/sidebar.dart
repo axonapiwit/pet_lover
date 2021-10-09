@@ -20,9 +20,9 @@ class _SideBarState extends State<SideBar> {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('${auth.currentUser!.email}',
+            accountEmail: Text('${auth.currentUser!.email}',
                 style: TextStyle(color: Colors.black, fontSize: 18)),
-            accountEmail: Text('Benc',
+            accountName: Text('Benc',
                 style: TextStyle(color: Colors.black, fontSize: 18)),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
