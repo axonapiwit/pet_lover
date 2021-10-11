@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:pet_lover/models/profile.dart';
-import 'package:pet_lover/screens/home.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -73,10 +72,30 @@ class _LoginState extends State<Login> {
                                         password: profile.password)
                                     .then((value) {
                                   formKey.currentState!.reset();
-                                  Navigator.pushReplacement(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return HomeScreen();
-                                  }));
+                                  // CollectionReference users = FirebaseFirestore
+                                  //     .instance
+                                  //     .collection('users');
+
+                                  // return FutureBuilder<DocumentSnapshot>(
+                                  //   future: users
+                                  //       .doc(FirebaseAuth
+                                  //           .instance.currentUser!.uid)
+                                  //       .get(),
+                                  //   builder: (BuildContext context, snapshot) {
+                                  //     if (snapshot.connectionState ==
+                                  //         ConnectionState.waiting) {
+                                  //       return Center(
+                                  //         child: CircularProgressIndicator(),
+                                  //       );
+                                  //     }
+                                  //     Map<String, dynamic> data = snapshot.data!
+                                  //         .data() as Map<String, dynamic>;
+                                  //     if (data['isNewUser'] == true) {
+                                  //       return Validate();
+                                  //     }
+                                  //     return HomeScreen();
+                                  //   },
+                                  // );
                                 });
                               } on FirebaseAuthException catch (e) {
                                 Fluttertoast.showToast(

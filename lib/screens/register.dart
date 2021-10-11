@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,15 @@ class _RegisterState extends State<Register> {
                                             email: profile.email,
                                             password: profile.password)
                                         .then((value) {
+                                      DocumentReference user = FirebaseFirestore
+                                          .instance
+                                          .collection('users')
+                                          .doc(value.user!.uid);
+                                      user
+                                          .set({'isNewUser': true})
+                                          .then((value) => print("User Added"))
+                                          .catchError((error) => print(
+                                              "Failed to add user: $error"));
                                       formKey.currentState!.reset();
                                       Fluttertoast.showToast(
                                           msg: "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว",
