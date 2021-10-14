@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_lover/constants.dart';
 
 class Body extends StatelessWidget {
@@ -22,13 +21,11 @@ class Body extends StatelessWidget {
 }
 
 class ItemInfo extends StatefulWidget {
-
   @override
   _ItemInfoState createState() => _ItemInfoState();
 }
 
 class _ItemInfoState extends State<ItemInfo> {
-
   bool isVisible = true;
 
   @override
@@ -57,10 +54,14 @@ class _ItemInfoState extends State<ItemInfo> {
                       children: <Widget>[
                         Text(
                           "Angelica",
-                          style: Theme.of(context).textTheme.headline,
+                          style: Theme.of(context).textTheme.headline1,
                         ),
-                        SizedBox(height: 10,),
-                        Text("2500 B",)
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "2500 B",
+                        )
                       ],
                     ),
                   ),
@@ -87,7 +88,6 @@ class _ItemInfoState extends State<ItemInfo> {
               ),
             ),
             SizedBox(height: 50),
-            
             Container(
               width: size.width * 0.8,
               decoration: BoxDecoration(
@@ -103,7 +103,7 @@ class _ItemInfoState extends State<ItemInfo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         RaisedButton(
-                          elevation: 0, 
+                          elevation: 0,
                           color: kPrimaryColor,
                           child: Text(
                             "ซื้อเลย",
@@ -113,9 +113,7 @@ class _ItemInfoState extends State<ItemInfo> {
                               fontSize: 18,
                             ),
                           ),
-                          onPressed: () {
-                            
-                          },
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -149,9 +147,7 @@ class _ItemInfoState extends State<ItemInfo> {
                               fontSize: 18,
                             ),
                           ),
-                          onPressed: () {
-                            
-                          },
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -165,4 +161,3 @@ class _ItemInfoState extends State<ItemInfo> {
     );
   }
 }
-
