@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_lover/screens/find.dart';
-import 'input.dart';
+import '../widgets/input.dart';
 import 'sale.dart';
 import 'sidebar.dart';
 
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Colors.pink.shade300,
                 iconSize: 30,
                 showSelectedLabels: false,
-                showUnselectedLabels: true,
+                showUnselectedLabels: false,
                 currentIndex: _selectedIndex,
                 type: BottomNavigationBarType.fixed,
                 items: [
@@ -71,10 +71,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icon(
                         Icons.home,
                         size: 40,
+                        color: Colors.white,
                       ),
                       label: 'Find Home'),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.money), label: 'Shopping'),
+                    icon: Icon(
+                      Icons.sell_outlined,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    label: 'Shopping',
+                  )
                 ],
                 onTap: _onItemTap),
           ),

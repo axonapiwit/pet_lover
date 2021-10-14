@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_lover/models/profile.dart';
 
+import 'home.dart';
+
 class Validate extends StatefulWidget {
   const Validate({Key? key}) : super(key: key);
 
@@ -60,6 +62,7 @@ class _ValidateState extends State<Validate> {
               body: SingleChildScrollView(
                 child: SafeArea(
                   child: Container(
+                    color: Colors.pink.shade50,
                     height: MediaQuery.of(context).size.height,
                     child: Form(
                       key: formKey,
@@ -74,13 +77,14 @@ class _ValidateState extends State<Validate> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            SizedBox(height: 20),
                             Container(
                               width: MediaQuery.of(context).size.width * 0.8,
                               margin: EdgeInsets.symmetric(vertical: 20),
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 5),
                               decoration: BoxDecoration(
-                                  color: Colors.pink.shade200,
+                                  color: Colors.pink.shade300,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(29))),
                               child: TextField(
@@ -101,7 +105,7 @@ class _ValidateState extends State<Validate> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 5),
                               decoration: BoxDecoration(
-                                  color: Colors.pink.shade200,
+                                  color: Colors.pink.shade300,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(29))),
                               child: TextField(
@@ -133,6 +137,10 @@ class _ValidateState extends State<Validate> {
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState!.save();
                                     await addUser();
+                                    Navigator.pushReplacement(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return HomeScreen();
+                                    }));
                                   }
                                   formKey.currentState!.reset();
                                 })

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_lover/screens/watch.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
 
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Poppins'),
-      home: Watch(),
+      home: MainScreen(),
     );
   }
 }
@@ -88,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
                           child: Text(
                             'Register',
                             style: TextStyle(
-                                color: Colors.green,
+                                color: Colors.pink.shade300,
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -111,7 +110,7 @@ class _MainScreenState extends State<MainScreen> {
                         decoration: BoxDecoration(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40.9)),
-                            color: Colors.green,
+                            color: Colors.pink.shade300,
                             boxShadow: [
                               BoxShadow(color: Colors.white, spreadRadius: 2)
                             ]),
@@ -137,7 +136,7 @@ class _MainScreenState extends State<MainScreen> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

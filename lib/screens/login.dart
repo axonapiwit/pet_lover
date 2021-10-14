@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:pet_lover/models/profile.dart';
+import 'package:pet_lover/screens/validate.dart';
 
 import 'home.dart';
 
@@ -37,6 +39,7 @@ class _LoginState extends State<Login> {
               body: SingleChildScrollView(
                 child: SafeArea(
                   child: Container(
+                    color: Colors.blue.shade50,
                     height: MediaQuery.of(context).size.height,
                     child: Form(
                       key: formKey,
@@ -51,13 +54,14 @@ class _LoginState extends State<Login> {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                            SizedBox(height: 20),
                             Padding(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(20),
                                 child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.pink.shade300,
                                       borderRadius:
-                                          new BorderRadius.circular(10.0),
+                                          new BorderRadius.circular(49.0),
                                     ),
                                     child: Padding(
                                         padding: EdgeInsets.only(
@@ -78,17 +82,20 @@ class _LoginState extends State<Login> {
                                             },
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              labelText: 'Email',
-                                              labelStyle: TextStyle(
+                                              prefixIcon: Icon(Icons.email,
+                                                  color: Colors.white),
+                                              hintText: "E-mail",
+                                              hintStyle: TextStyle(
+                                                  fontSize: 18,
                                                   color: Colors.white),
                                             ))))),
                             Padding(
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(20),
                                 child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.pink.shade300,
                                       borderRadius:
-                                          new BorderRadius.circular(10.0),
+                                          new BorderRadius.circular(49.0),
                                     ),
                                     child: Padding(
                                         padding: EdgeInsets.only(
@@ -102,17 +109,29 @@ class _LoginState extends State<Login> {
                                             },
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
-                                              labelText: 'password',
-                                              labelStyle: TextStyle(
+                                              prefixIcon: Icon(
+                                                  Icons.vpn_key_outlined,
+                                                  color: Colors.white),
+                                              suffixIcon: Icon(
+                                                  Icons.visibility_outlined,
+                                                  color: Colors.white),
+                                              hintText: "Password",
+                                              hintStyle: TextStyle(
+                                                  fontSize: 18,
                                                   color: Colors.white),
                                             ))))),
+                            SizedBox(height: 10),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.pink.shade300,
-                                    fixedSize: Size(200, 50),
+                                    fixedSize: Size(200, 60),
+                                    textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(50))),
+                                            BorderRadius.circular(40.9))),
                                 onPressed: () async {
                                   if (formKey.currentState!.validate()) {
                                     formKey.currentState!.save();
@@ -122,23 +141,54 @@ class _LoginState extends State<Login> {
                                               email: profile.email,
                                               password: profile.password)
                                           .then((value) {
+                                        print(FirebaseAuth
+                                            .instance.currentUser?.uid);
+                                        if (FirebaseAuth
+                                                .instance.currentUser?.uid !=
+                                            null) {
+                                          FirebaseFirestore.instance
+                                              .collection('users')
+                                              .doc(FirebaseAuth
+                                                  .instance.currentUser!.uid)
+                                              .get()
+                                              .then((documentSnapshot) {
+                                            if (documentSnapshot
+                                                    .data()!['isNewUser'] ==
+                                                true) {
+                                              return Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Validate();
+                                              }));
+                                            }
+                                            return Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return HomeScreen();
+                                            }));
+                                          });
+                                        }
                                         formKey.currentState!.reset();
-                                        Navigator.pushReplacement(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return HomeScreen();
-                                        }));
                                       });
                                     } on FirebaseAuthException catch (e) {
+                                      String message;
+                                      if (e.code == 'user-not-found') {
+                                        message =
+                                            "บัญชีผู้ใช้นี้ โปรดใช้อีเมลอื่นแทน";
+                                      } else if (e.code == 'wrong-password') {
+                                        message = "รหัสผ่านผิด";
+                                      } else {
+                                        message = e.message!;
+                                      }
                                       Fluttertoast.showToast(
-                                          msg: e.message!,
+                                          msg: message,
                                           gravity: ToastGravity.CENTER);
                                     }
                                   }
                                 },
                                 child: Text(
                                   'Login',
-                                  style: TextStyle(fontSize: 18),
+                                  style: TextStyle(fontSize: 24),
                                 ))
                           ],
                         ),
