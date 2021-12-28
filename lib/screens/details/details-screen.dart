@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pet_lover/constants.dart';
 import 'package:pet_lover/screens/details/components/body.dart';
 
